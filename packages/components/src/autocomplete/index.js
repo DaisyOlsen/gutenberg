@@ -225,7 +225,7 @@ const getAutoCompleterUI = ( autocompleter ) => {
 		onReset,
 		value,
 		contentRef,
-		popoverProps = {},
+		position = 'top right',
 	} ) {
 		const [ items ] = useItems( filterValue );
 		const anchorRef = useAnchorRef( { ref: contentRef, value } );
@@ -242,10 +242,9 @@ const getAutoCompleterUI = ( autocompleter ) => {
 			<Popover
 				focusOnMount={ false }
 				onClose={ onReset }
-				position="top right"
+				position={ position }
 				className="components-autocomplete__popover"
 				anchorRef={ anchorRef }
-				{ ...popoverProps }
 			>
 				<div
 					id={ listBoxId }
@@ -489,7 +488,7 @@ function Autocomplete( {
 	}, [ textContent ] );
 
 	const { key: selectedKey = '' } = filteredOptions[ selectedIndex ] || {};
-	const { className, popoverProps } = autocompleter || {};
+	const { className, position } = autocompleter || {};
 	const isExpanded = !! autocompleter && filteredOptions.length > 0;
 	const listBoxId = isExpanded
 		? `components-autocomplete-listbox-${ instanceId }`
@@ -517,7 +516,7 @@ function Autocomplete( {
 					onSelect={ select }
 					value={ record }
 					contentRef={ contentRef }
-					popoverProps={ popoverProps }
+					position={ position }
 				/>
 			) }
 		</>
