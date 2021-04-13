@@ -195,13 +195,13 @@ class WP_Theme_JSON_Resolver {
 			/*
 			 * We need to process the paths that include '*' separately.
 			 * One example of such a path would be:
-			 * [ 'settings', '*', 'color', 'palette' ]
+			 * [ 'settings', 'blocks', '*', 'color', 'palette' ]
 			 */
 			$nodes_to_iterate = array_keys( $path, '*', true );
 			if ( ! empty( $nodes_to_iterate ) ) {
 				/*
 				 * At the moment, we only need to support one '*' in the path, so take it directly.
-				 * - base will be [ 'settings' ]
+				 * - base will be [ 'settings', 'blocks' ]
 				 * - data will be [ 'color', 'palette' ]
 				 */
 				$base_path = array_slice( $path, 0, $nodes_to_iterate[0] );
@@ -213,7 +213,7 @@ class WP_Theme_JSON_Resolver {
 						continue;
 					}
 
-					// Whole path will be [ 'settings', 'core/paragraph', 'color', 'palette' ].
+					// Whole path will be [ 'settings', 'blocks', 'core/paragraph', 'color', 'palette' ].
 					$whole_path       = array_merge( $base_path, array( $node_name ), $data_path );
 					$translated_array = self::translate_theme_json_chunk( $array_to_translate, $key, $context, $domain );
 					gutenberg_experimental_set( $theme_json, $whole_path, $translated_array );

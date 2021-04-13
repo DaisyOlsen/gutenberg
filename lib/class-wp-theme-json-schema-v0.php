@@ -161,7 +161,7 @@ class WP_Theme_JSON_Schema_V0 implements WP_Theme_JSON_Schema {
 			$new['styles'] = self::process_styles( $old['styles'], $blocks_to_consolidate );
 		}
 
-		$new['version'] = 1;
+		$new['version'] = WP_Theme_JSON::LATEST_SCHEMA;
 
 		return $new;
 	}
