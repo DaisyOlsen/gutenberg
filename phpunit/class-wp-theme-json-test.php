@@ -786,17 +786,15 @@ class WP_Theme_JSON_Test extends WP_UnitTestCase {
 			)
 		);
 
-		$page_templates = $theme_json->get_custom_templates();
-
-		$this->assertEqualSetsWithIndex(
-			$page_templates,
-			array(
-				'page-home' => array(
-					'title'     => 'Homepage template',
-					'postTypes' => array( 'page' ),
-				),
-			)
+		$actual   = $theme_json->get_custom_templates();
+		$expected = array(
+			'page-home' => array(
+				'title'     => 'Homepage template',
+				'postTypes' => array( 'page' ),
+			),
 		);
+
+		$this->assertEqualSetsWithIndex( $expected, $actual );
 	}
 
 	function test_get_template_parts() {
@@ -811,16 +809,10 @@ class WP_Theme_JSON_Test extends WP_UnitTestCase {
 			)
 		);
 
-		$template_parts = $theme_json->get_template_parts();
+		$actual   = $theme_json->get_template_parts();
+		$expected = array( 'small-header' => array( 'area' => 'header' ) );
 
-		$this->assertEqualSetsWithIndex(
-			$template_parts,
-			array(
-				'small-header' => array(
-					'area' => 'header',
-				),
-			)
-		);
+		$this->assertEqualSetsWithIndex( $expected, $actual );
 	}
 
 	function test_get_from_editor_settings() {
